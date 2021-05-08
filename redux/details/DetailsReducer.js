@@ -8,22 +8,27 @@ import {ADDDATA} from '../Type';
 export default (state = {}, action) => {
   console.log(action.type);
   switch (action.type) {
-   
     case 'ADD_USER_REQUEST':
       // console.log('action', action.payload);
       return {
         ...state,
-       isLoading:true
+        isLoading: true,
       };
-      case 'ADD_USER_SUCCESS':
-      alert(JSON.stringify(action.payload));
+    case 'ADD_USER_SUCCESS':
+      // alert(JSON.stringify(action.payload));
       return {
         ...state,
-       isLoading:false,
-       ...action.payload
-
+        isLoading: false,
+        ...action.payload,
       };
 
+    case 'CLOSE_MODAL':
+      // console.log('faf', action.payload);
+      return {
+        ...state,
+        isLoading: false,
+        status: action.payload,
+      };
     default:
       return state;
   }

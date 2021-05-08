@@ -2,7 +2,7 @@ import {all, call, put, takeLatest} from '@redux-saga/core/effects';
 import DetailsAction from './DetailsAction';
 
 function* addUser({payload}) {
-  console.log(payload, 'chutiyo');
+
 
   try {
     if (payload) {

@@ -12,4 +12,10 @@ export default class DetailsAction {
       payload: succesData,
     };
   }
+  static setModalState(state) {
+    return {
+      type: 'CLOSE_MODAL',
+      payload: state,
+    };
+  }
 }

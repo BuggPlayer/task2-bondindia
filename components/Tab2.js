@@ -1,12 +1,17 @@
 import React from 'react';
 import {Text, View, TextInput, Button} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import DetailsAction from '../redux/details/DetailsAction';
 
+import Modal from 'react-native-modal';
+
 const Tab2 = props => {
   const dispatch = useDispatch();
+  const state = useSelector(state => state.detailsReducer);
+  console.log('state', state);
+
   const signUpValidationSchema = yup.object().shape({
     phoneNumber: yup
       .string()
@@ -29,6 +34,28 @@ const Tab2 = props => {
 
   return (
     <View>
+      {state?.status && (
+        <Modal isVisible={state?.status}>
+          <View
+            style={{
+              height: 150,
+              backgroundColor: 'white',
+              borderRadius: 5,
+              elevation: 8,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text style={{fontSize: 24}}>Success!</Text>
+
+            <Button
+              title="Close"
+              onPress={() => {
+                dispatch(DetailsAction.setModalState(false));
+              }}
+            />
+          </View>
+        </Modal>
+      )}
       <View>
         <Formik
           validationSchema={signUpValidationSchema}
